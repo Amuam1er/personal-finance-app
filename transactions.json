@@ -1,0 +1,14 @@
+[
+    {
+        "timestamp": "2025-04-22T14:32:59.729976",
+        "type": "income",
+        "amount": 300000.0,
+        "note": "Cash Injection"
+    },
+    {
+        "timestamp": "2025-04-22T14:35:04.555949",
+        "type": "expense",
+        "amount": 20000.0,
+        "note": "Fuel"
+    }
+]
