@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import messagebox
 import datetime
 
+FONT = ("Segoe UI", 11)
+HEADER_FONT = ("Segoe UI", 12, "bold")
 # ========== VARIABLES ==========
 income = 0
 expenses = 0
@@ -69,36 +71,37 @@ def clear_inputs():
 # ========== GUI SETUP ==========
 
 app = tk.Tk()
-app.title("Personal Finance App")
+app.title(" My Personal Finance App")
 app.geometry("600x500")  # Width x Height
+app.configure(bg="#f5f5f5")
 
 # Input Fields
-amount_label = tk.Label(app, text="Amount:")
-amount_label.pack()
-amount_entry = tk.Entry(app)
-amount_entry.pack()
+amount_label = tk.Label(app, text="Amount:", font=HEADER_FONT, bg="#f5f5f5")
+amount_label.pack(pady=(10, 0))  # Add some padding
+amount_entry = tk.Entry(app, font=FONT, width=30)
+amount_entry.pack(pady=5)
 
-note_label = tk.Label(app, text="Note:")
-note_label.pack()
-note_entry = tk.Entry(app)
-note_entry.pack()
+note_label = tk.Label(app, text="Note:", font=HEADER_FONT, bg="#f5f5f5")
+note_label.pack(pady=(10, 0))  # Add some padding
+note_entry = tk.Entry(app, font=FONT, width=30)
+note_entry.pack(pady=5)
 
 # Buttons
-add_income_button = tk.Button(app, text="Add Income", command=add_income)
+add_income_button = tk.Button(app, text="Add Income", font=FONT, bg="#4CAF50", fg="white", padx=10, pady=5, command=add_income)
 add_income_button.pack(pady=5)
 
-add_expense_button = tk.Button(app, text="Add Expense", command=add_expense)
+add_expense_button = tk.Button(app, text="Add Expense", font=FONT, bg="#F44336", fg="white", padx=10, pady=5, command=add_expense)
 add_expense_button.pack(pady=5)
 
-view_balance_button = tk.Button(app, text="View Balance Sheet", command=view_balance_sheet)
+view_balance_button = tk.Button(app, text="View Balance Sheet", font=FONT, bg="#2196F3", fg="white", padx=10, pady=5, command=view_balance_sheet)
 view_balance_button.pack(pady=5)
 
 # Output Text Area
-output_text = tk.Text(app, height=15, width=70)
-output_text.pack(pady=10)
+output_text = tk.Text(app, height=15, width=70, font=("Courier New", 10), bg="white", fg="black")
+output_text.pack(padx=10, pady=10)
 
 # Exit Button
-exit_button = tk.Button(app, text="Exit", command=app.quit)
+exit_button = tk.Button(app, text="Exit", font=FONT, bg="#9E9E9E", fg="white", padx=10, pady=5, command=app.quit)
 exit_button.pack(pady=5)
 
 # ========== RUN THE APP ==========
