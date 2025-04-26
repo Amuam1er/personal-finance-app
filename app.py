@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 import datetime
+import csv
+from tkinter import filedialog
 
 FONT = ("Segoe UI", 11)
 HEADER_FONT = ("Segoe UI", 12, "bold")
@@ -10,6 +12,27 @@ expenses = 0
 transactions = []
 
 # ========== FUNCTIONS ==========
+def export_to_csv():
+    if not transactions:
+        messagebox.showinfo("No Data", "There are no transactions to export.")
+        return
+
+    file_path = filedialog.asksaveasfilename(
+        defaultextension=".csv",
+        filetypes=[("CSV Files", "*.csv")],
+        title="Save transactions as CSV"
+    )
+
+    if file_path:
+        try:
+            with open(file_path, mode="w", newline="") as file:
+                writer = csv.writer(file)
+                writer.writerow(["Type", "Amount", "Note", "Timestamp"])
+                for t in transactions:
+                    writer.writerow([t["type"], t["amount"], t["note"], t["timestamp"]])
+            messagebox.showinfo("Exported", f"Transactions exported successfully to:\n{file_path}")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to export:\n{str(e)}")
 
 def add_income():
     global income
@@ -95,6 +118,9 @@ add_expense_button.pack(pady=5)
 
 view_balance_button = tk.Button(app, text="View Balance Sheet", font=FONT, bg="#2196F3", fg="white", padx=10, pady=5, command=view_balance_sheet)
 view_balance_button.pack(pady=5)
+
+export_button = tk.Button(app, text="Export to CSV", font=FONT, bg="#FF9800", fg="white", padx=10, pady=5, command=export_to_csv)
+export_button.pack(pady=(10, 0))
 
 # Output Text Area
 output_text = tk.Text(app, height=15, width=70, font=("Courier New", 10), bg="white", fg="black")
